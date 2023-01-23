@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+.title {
+    font-family: "Quicksand", sans-serif;
+    text-align: center;
+}
+
+.image {
+    filter: blur(10px);
+    transition: ease-in-out 200ms;
+}
+
+.image:hover {
+    cursor: pointer;
+    border-radius: 24px;
+    transform: scale(1.1);
+    filter: blur(0px);
+}
+
+.imageContainer {
+    width: 164px;
+    height: 164px;
+}
+
+.imageList {
+    width: 500px;
+    height: 450px;
+}
+
+@media only screen and (max-width: 600px) {
+    .imageList {
+        width: 300px;
+        height: 250px;
+    }
+  }
+
+@media only screen and (min-width: 1600px) {
+    .imageList {
+        width: 800px;
+        height: 750px;
+    }
+    .imageContainer {
+        width: 300px;
+        height: 300px;
+    }
+  }
