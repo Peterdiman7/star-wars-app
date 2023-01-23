@@ -1,23 +1,38 @@
-import logo from './logo.svg';
+
+import { Suspense } from "react";
+import {Routes, Route } from "react-router-dom";
+
+
 import './App.css';
+import FormDialog from "./components/dialog/Dialog"
+import Details from "./components/details/Details";
+import Home from "./components/home/Home";
+import Login from "./components/login/Login";
+import Planet from './components/planets/Planet';
+import Pilots from "./components/pilots/Pilots";
+import MainPage from "./components/main/MainPage";
+import Starship from "./components/starships/Starship";
+import StarshipDetails from "./components/details/StarshipDetails";
+import Register from "./components/register/Register";
 
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Suspense fallback={"Loading..."}>
+      <Routes>
+        <Route path="/main" element={<MainPage />} />
+        <Route path="/" exact element={<Home />} />
+        <Route path="/planets" element={<Planet />} />
+        <Route path="/planets/:id" element={<Details />} />
+        <Route path="/starships" element={<Starship />} />
+        <Route path="/starships/:id" element={<StarshipDetails />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/dialog" element={<FormDialog />} />
+        <Route path="/pilots" element={<Pilots />} />
+      </Routes>
+      </Suspense>
     </div>
   );
 }

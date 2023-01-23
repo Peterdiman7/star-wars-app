@@ -1,0 +1,19 @@
+.error {
+    margin-bottom: 20px;
+    color: red;
+}
+
+.optional {
+    margin-bottom: 20px;
+    color: lightgray;
+}
+
+.selector {
+    padding-top: 10px;
+}
+
+@media screen and (max-width: 600px) {
+  .pilotsBtn {
+    font-size: 8px !important;
+  }
+}
