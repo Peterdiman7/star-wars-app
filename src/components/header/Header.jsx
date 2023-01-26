@@ -16,7 +16,7 @@ import { auth } from "../../utils/firebase";
 
 const Header = () => {
 
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   const { t } = useTranslation(["common"]);
 
@@ -46,7 +46,7 @@ const Header = () => {
       >
         <Toolbar>
           <Button sx={{ color: "white" }}>
-            <HouseIcon onClick={mainPageClickHandler} />
+            <HouseIcon onClick={() => navigate("/main")} />
           </Button>
           <Typography
           className={styles.heading}

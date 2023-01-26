@@ -14,11 +14,12 @@ import MainPage from "./components/main/MainPage";
 import Starship from "./components/starships/Starship";
 import StarshipDetails from "./components/details/StarshipDetails";
 import Register from "./components/register/Register";
+import { Toaster } from "react-hot-toast";
 
 function App() {
 
   return (
-    <div>
+    <>
       <Suspense fallback={"Loading..."}>
       <Routes>
         <Route path="/main" element={<MainPage />} />
@@ -33,7 +34,7 @@ function App() {
         <Route path="/pilots" element={<Pilots />} />
       </Routes>
       </Suspense>
-    </div>
+    </>
   );
 }
 

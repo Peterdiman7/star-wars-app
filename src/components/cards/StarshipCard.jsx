@@ -1,6 +1,5 @@
 import starshipImg from "../../assets/starship.jpeg"
 import * as React from 'react';
-import { styled } from '@mui/material/styles';
 import styles from "../cards/Card.module.css";
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
@@ -30,6 +29,7 @@ export default function CardComponent({singleStarship}) {
   }
 
   return (
+
     <div>
     <Card sx={{ maxWidth: 345, margin: "auto" }}>
 
@@ -62,4 +62,4 @@ export default function CardComponent({singleStarship}) {
     </Card>
   </div>
   );
-}
+  }

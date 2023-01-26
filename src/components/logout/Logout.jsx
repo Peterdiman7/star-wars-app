@@ -1,17 +1,18 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { auth } from "../../utils/firebase";
 
 const Logout = () => {
+  const navigate = useNavigate();
+
   function logoutUser() {
     auth.signOut();
+    navigate("/");
   }
 
   return (
-    <div>
-      <Link to="/">
-        <button onClick={logoutUser}>Logout</button>
-      </Link>
-    </div>
+
+    <button onClick={logoutUser}>Logout</button>
+
   );
 };
 

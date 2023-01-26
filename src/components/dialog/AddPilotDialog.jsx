@@ -7,7 +7,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import results from "../../results";
-import styles from "../dialog/Dialog.module.css";
+import styles from "../dialog/AddPilotDialog.module.css";
 
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
@@ -18,11 +18,11 @@ import { useTranslation } from "react-i18next";
 
 import useFetch from "../../useFetch";
 
-export default function FormDialog() {
+const AddPilotDialog = () =>  {
 const { t } = useTranslation(["common"]);
 
 // Custom Hook
-const { starships } = useFetch("https://swapi.dev/api/starships");
+const { data } = useFetch("https://swapi.dev/api/starships");
 
   const [open, setOpen] = React.useState(false);
 
@@ -162,7 +162,7 @@ const { starships } = useFetch("https://swapi.dev/api/starships");
                 onChange={formik.handleChange}
                 value={formik.values.starshipName}
               >
-                {starships.map((starship) => (
+                {data.map((starship) => (
                   <MenuItem key={starship.name} value={starship.name}>
                     {starship.name}
                   </MenuItem>
@@ -243,3 +243,5 @@ const { starships } = useFetch("https://swapi.dev/api/starships");
     </div>
   );
 }
+
+export default AddPilotDialog;

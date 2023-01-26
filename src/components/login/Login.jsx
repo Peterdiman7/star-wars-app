@@ -7,10 +7,10 @@ import { useTranslation } from "react-i18next";
 
 const Login = () => {
   
-    let navigate = useNavigate();
+  const navigate = useNavigate();
   const { t } = useTranslation(["common"]);
 
-  function OnLoginFormSubmitHandler(e) {
+  const OnLoginFormSubmitHandler = (e) => {
     e.preventDefault();
 
     let username = e.target.username.value;
@@ -20,7 +20,7 @@ const Login = () => {
         .then((userCredentials) => {
   
           toast.success(
-            "Login Successful! You will be redirected to Main page!",
+            "Login Successful!",
             {
               duration: 3000,
               position: "top-center",
