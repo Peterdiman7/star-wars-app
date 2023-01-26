@@ -5,7 +5,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Header from "../header/Header";
 
 import styles from "../pilots/Pilots.module.css";
@@ -18,7 +18,7 @@ function Pilots() {
 
   const pilotsArr = [];
 
-  useEffect(() => {
+  React.useEffect(() => {
     const fetchPilots = async () => {
       try {
         const response = await axios(url);
@@ -35,7 +35,7 @@ function Pilots() {
       }
     };
     fetchPilots();
-  }, []);
+  }, [pilots])
 
   return (
     <>

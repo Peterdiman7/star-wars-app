@@ -8,7 +8,7 @@ const Register = () => {
   const {t} = useTranslation(["common"]);
 
   let navigate = useNavigate();
-  function OnRegisterFormSubmitHandler(e) {
+  function onRegisterFormSubmitHandler(e) {
     e.preventDefault();
 
     let username = e.target.username.value;
@@ -17,7 +17,6 @@ const Register = () => {
     auth
       .createUserWithEmailAndPassword(username, password)
       .then((userCredentials) => {
-        console.log(userCredentials);
 
         toast.success(
           "Register Successful! You will be redirected to Main page!",
@@ -38,7 +37,7 @@ const Register = () => {
 
   return (
     <div className={styles.form}>
-      <form onSubmit={OnRegisterFormSubmitHandler}>
+      <form onSubmit={onRegisterFormSubmitHandler}>
         <div className={styles.title}>{t("welcome")}</div>
         <div className={styles.subtitle}>{t("createAcc")}</div>
         <div className={styles.inputContainer}>

@@ -82,7 +82,7 @@ const Planet = () => {
       }
     };
     fetchData();
-  }, [planetUrl]);
+  }, []);
 
   if (!isActive) {
     return (
