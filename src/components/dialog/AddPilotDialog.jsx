@@ -23,7 +23,6 @@ const { t } = useTranslation(["common"]);
 
 // Custom Hook
 const { data } = useFetch("https://swapi.dev/api/starships");
-
   const [open, setOpen] = React.useState(false);
 
   let navigate = useNavigate();
@@ -236,7 +235,7 @@ const { data } = useFetch("https://swapi.dev/api/starships");
             >
               {t("apply")}
             </Button>
-            <Toaster position="bottom-center" reverseOrder={true} />
+            {/* <Toaster position="bottom-center" reverseOrder={true} /> */}
           </DialogActions>
         </form>
       </Dialog>

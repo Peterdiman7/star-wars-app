@@ -13,6 +13,10 @@ import { useTranslation } from "react-i18next";
 export default function CardComponent({ singlePlanet }) {
   const {t} = useTranslation(["common"]);
 
+React.useEffect(() => {
+  
+}, [])
+
   return (
     <div>
       <Card sx={{ maxWidth: 345, margin: "auto" }}>

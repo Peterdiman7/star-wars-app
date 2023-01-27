@@ -1,40 +1,47 @@
 import { auth } from "../../utils/firebase";
 import { useNavigate } from "react-router-dom";
 import styles from "../register/Register.module.css";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 
 const Register = () => {
-  const {t} = useTranslation(["common"]);
+  const { t } = useTranslation(["common"]);
 
   let navigate = useNavigate();
+
   function onRegisterFormSubmitHandler(e) {
     e.preventDefault();
 
     let username = e.target.username.value;
     let password = e.target.password.value;
 
-    auth
-      .createUserWithEmailAndPassword(username, password)
-      .then((userCredentials) => {
+    const currentUser = auth.currentUser;
 
-        toast.success(
-          "Register Successful! You will be redirected to Main page!",
-          {
+    if (!currentUser) {
+      auth
+        .createUserWithEmailAndPassword(username, password)
+        .then((userCredentials) => {
+          toast.success("Successfully registered!", {
             duration: 3000,
             position: "top-center",
             iconTheme: {
               primary: "#A4DE02",
               secondary: "#fff",
             },
-          }
-        );
-        setTimeout(() => {
-          navigate("/main");
-        }, 3000);
-      });
+          });
+          setTimeout(() => {
+            navigate("/main");
+          }, 3000);
+        })
+        .catch((err) => toast.error(err.code));
+    }
+    if (currentUser) {
+      toast.error("Log out to create an account!");
+      setTimeout(() => {
+        navigate("/main");
+      }, 2000);
+    }
   }
-
   return (
     <div className={styles.form}>
       <form onSubmit={onRegisterFormSubmitHandler}>
@@ -61,10 +68,8 @@ const Register = () => {
         <button type="submit" className={styles.submit}>
           {t("submit")}
         </button>
-        <Toaster position="top-center" reverseOrder={true} />
       </form>
     </div>
   );
 };
-
 export default Register;

@@ -8,7 +8,7 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import HouseIcon from "@mui/icons-material/House";
 import LogoutIcon from '@mui/icons-material/Logout';
-import FormDialog from "../dialog/Dialog";
+import AddPilotDialog from "../dialog/AddPilotDialog";
 
 
 import { useTranslation } from "react-i18next";
@@ -67,7 +67,7 @@ const Header = () => {
           >
             {t("starshipsHeader")}
           </Button>
-          <FormDialog />
+          <AddPilotDialog />
           <LogoutIcon onClick={logoutHandler} />
         </Toolbar>
       </AppBar>

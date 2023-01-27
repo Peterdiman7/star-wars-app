@@ -1,4 +1,3 @@
-import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 
 import i18next from "i18next";
@@ -9,39 +8,43 @@ import toast, { Toaster } from "react-hot-toast";
 import backgroundVideo from "../../assets/intro.mp4";
 import styles from "../home/Home.module.css";
 import { useEffect } from "react";
+import { auth } from "../../utils/firebase";
 
 const Home = () => {
   let navigate = useNavigate();
   const { i18n, t } = useTranslation(["common"]);
 
   function loginClickBtnHandler() {
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        toast.error(
-          "Error! You are already logged in! You will be redirected...",
-          {
-            icon: "❌",
-            duration: 3000,
-          }
-        );
-        setTimeout(() => {
-          navigate("/planets");
-        }, 3000);
-      } else if (!user) {
-        return navigate("/login");
-      }
-    });
+    const user = auth.currentUser;
+
+    if (user) {
+      toast.error(
+        "Error! You are already logged in! You will be redirected...",
+        {
+          icon: "❌",
+          duration: 2000,
+        }
+      );
+      setTimeout(() => {
+        navigate("/planets");
+      }, 2000);
+    } else if (!user) {
+      toast.success("Ready yourself!");
+      setTimeout(() => {
+        navigate("/login");
+      }, 1500);
+    }
   }
 
   useEffect(() => {
-    if(localStorage.getItem("i18nextLng")?.length > 2){
+    if (localStorage.getItem("i18nextLng")?.length > 2) {
       i18next.changeLanguage("en");
     }
-  }, [])
+  }, []);
 
   const handleLanguageChange = (e) => {
     i18n.changeLanguage(e.target.value);
-  }
+  };
 
   return (
     <div className={styles.background}>
@@ -51,10 +54,20 @@ const Home = () => {
           <p className={styles.registerBtnText}>{t("becomeAJedi")}</p>
         </button>
       </Link>
-      <select value={localStorage.getItem("i18nextLng")} onChange={handleLanguageChange} className={styles.languageSelect}>
-      <option value="" disabled defaultValue>Select something...</option>
-        <option className={styles.choice} value="en">EN</option>
-        <option className={styles.choice} value="bg">BG</option>
+      <select
+        value={localStorage.getItem("i18nextLng")}
+        onChange={handleLanguageChange}
+        className={styles.languageSelect}
+      >
+        <option value="" disabled defaultValue>
+          Select something...
+        </option>
+        <option className={styles.choice} value="en">
+          EN
+        </option>
+        <option className={styles.choice} value="bg">
+          BG
+        </option>
       </select>
       <button onClick={loginClickBtnHandler} className={styles.loginBtn}>
         <p className={styles.loginBtnText}>{t("alreadyAJedi")}</p>
