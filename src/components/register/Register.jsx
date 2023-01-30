@@ -1,54 +1,41 @@
-import { auth } from "../../utils/firebase";
 import { useNavigate } from "react-router-dom";
 import styles from "../register/Register.module.css";
 import toast from "react-hot-toast";
+import { UserAuth } from "../../context/AuthContext";
 import { useTranslation } from "react-i18next";
+import { useState } from "react";
 
 const Register = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const { createUser } = UserAuth();
+
   const { t } = useTranslation(["common"]);
 
   let navigate = useNavigate();
 
-  function onRegisterFormSubmitHandler(e) {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    let username = e.target.username.value;
-    let password = e.target.password.value;
-
-    const currentUser = auth.currentUser;
-
-    if (!currentUser) {
-      auth
-        .createUserWithEmailAndPassword(username, password)
-        .then((userCredentials) => {
-          toast.success("Successfully registered!", {
-            duration: 3000,
-            position: "top-center",
-            iconTheme: {
-              primary: "#A4DE02",
-              secondary: "#fff",
-            },
-          });
-          setTimeout(() => {
-            navigate("/main");
-          }, 3000);
-        })
-        .catch((err) => toast.error(err.code));
-    }
-    if (currentUser) {
-      toast.error("Log out to create an account!");
-      setTimeout(() => {
-        navigate("/main");
-      }, 2000);
+    setError("");
+    try {
+      await createUser(email, password)
+      navigate("/main");
+    } catch (e) {
+      setError(e.message);
+      toast.error(error);
     }
   }
+
   return (
     <div className={styles.form}>
-      <form onSubmit={onRegisterFormSubmitHandler}>
+      <form onSubmit={handleSubmit}>
         <div className={styles.title}>{t("welcome")}</div>
         <div className={styles.subtitle}>{t("createAcc")}</div>
         <div className={styles.inputContainer}>
           <input
+          onChange={(e) => setEmail(e.target.value)}
             name="username"
             id="firstname"
             className={styles.emailInput}
@@ -58,6 +45,7 @@ const Register = () => {
         </div>
         <div className={styles.inputContainer}>
           <input
+          onChange={(e) => setPassword(e.target.value)}
             name="password"
             id="lastname"
             className={styles.passwordInput}

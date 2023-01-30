@@ -12,7 +12,7 @@ const Details = () => {
         fetch(url + id)
             .then(res => res.json())
             .then(data => setSinglePlanet(data));
-    })
+    }, [])
     return(
         <div>
             {<CardComponent singlePlanet={singlePlanet} />}

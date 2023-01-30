@@ -15,7 +15,7 @@ const StarshipDetails = () => {
     }, [])
     return(
         <div>
-            {<CardComponent singleStarship={singleStarship} />}
+            {<CardComponent singleStarship={singleStarship} starshipId={id} />}
         </div>
     );
 }

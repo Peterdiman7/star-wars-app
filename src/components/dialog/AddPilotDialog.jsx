@@ -9,7 +9,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import results from "../../results";
 import styles from "../dialog/AddPilotDialog.module.css";
 
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -18,11 +18,11 @@ import { useTranslation } from "react-i18next";
 
 import useFetch from "../../useFetch";
 
-const AddPilotDialog = () =>  {
-const { t } = useTranslation(["common"]);
+const AddPilotDialog = () => {
+  const { t } = useTranslation(["common"]);
 
-// Custom Hook
-const { data } = useFetch("https://swapi.dev/api/starships");
+  // Custom Hook
+  const { data } = useFetch("https://swapi.dev/api/starships");
   const [open, setOpen] = React.useState(false);
 
   let navigate = useNavigate();
@@ -49,6 +49,7 @@ const { data } = useFetch("https://swapi.dev/api/starships");
     date: Yup.date().required("Required!"),
     experience: Yup.number()
       .min(0, "You cannot enter a negative number!")
+      .integer("Must be an integer!")
       .required("Required!"),
     starshipName: Yup.string()
       .min(3, "Starship name must be at least three letters long!")
@@ -88,18 +89,17 @@ const { data } = useFetch("https://swapi.dev/api/starships");
   return (
     <div>
       <Button
-      className={styles.pilotsBtn}
-      sx={{ color: "white" }} 
-      onClick={handleClickOpen}>
+        className={styles.pilotsBtn}
+        sx={{ color: "white" }}
+        onClick={handleClickOpen}
+      >
         {t("pilotsHeader")}
       </Button>
       <Dialog open={open} onClose={handleClose}>
         <form onSubmit={formik.handleSubmit}>
           <DialogTitle>{t("applicationForm")}</DialogTitle>
           <DialogContent>
-            <DialogContentText>
-              {t("applicationDesc")}
-            </DialogContentText>
+            <DialogContentText>{t("applicationDesc")}</DialogContentText>
 
             <TextField
               onChange={formik.handleChange}
@@ -235,12 +235,11 @@ const { data } = useFetch("https://swapi.dev/api/starships");
             >
               {t("apply")}
             </Button>
-            {/* <Toaster position="bottom-center" reverseOrder={true} /> */}
           </DialogActions>
         </form>
       </Dialog>
     </div>
   );
-}
+};
 
 export default AddPilotDialog;

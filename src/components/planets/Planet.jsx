@@ -5,7 +5,7 @@ import Header from "../header/Header";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import planetId from "../../utils/arrSplit";
+import { planetId }  from "../../utils/arrSplit";
 
 import styles from "../planets/Planet.module.css";
 import { useTranslation } from "react-i18next";
@@ -15,7 +15,6 @@ const Planet = () => {
 
   const url = "https://swapi.dev/api/planets";
 
-  const [planetUrl, setPlanetUrl] = useState();
   const [planets, setPlanets] = useState([]);
   const [query, setQuery] = useState("");
   const [isActive, setIsActive] = useState(true);
@@ -27,62 +26,51 @@ const Planet = () => {
   }
 
   planets.forEach((planet) => climateArr.push(planet.climate));
-  function showLessPlanets() {
-    let showLessBtn = document.getElementById("showLess");
+  const showPageOne = async () => {
+    const showLessBtn = document.getElementById("showLess");
     showLessBtn.disabled = true;
 
-    let showMoreBtn = document.getElementById("showMore");
+    const showMoreBtn = document.getElementById("showMore");
     showMoreBtn.disabled = false;
 
-    const fetchLess = async () => {
-      try {
-        const response = await axios(url);
+    try {
+        const response = await axios(url + "?page=1");
         const data = response.data;
-        setPlanetUrl(data.previous);
-      } catch (error) {
-        console.log(error.response);
-      }
-    };
-    fetchLess();
-  }
+        setPlanets(data.results);
+    } catch (error) {
+        console.log(error.message);
+    }
+}
 
-  function showMorePlanets() {
-    let showLessBtn = document.getElementById("showLess");
+const showPageTwo = async () => {
+    const showLessBtn = document.getElementById("showLess");
     showLessBtn.disabled = false;
 
-    let showMoreBtn = document.getElementById("showMore");
+    const showMoreBtn = document.getElementById("showMore");
     showMoreBtn.disabled = true;
 
-    const fetchMore = async () => {
-      try {
-        const response = await axios(url);
+    try {
+        const response = await axios(`${url}?page=2`);
         const data = response.data;
-        setPlanetUrl(data.next);
-      } catch (error) {
-        console.log(error.response);
-      }
-    };
-    fetchMore();
-  }
+        setPlanets(data.results);
+    } catch (error) {
+        console.log(error.message);
+    }
+}
 
-  useEffect(() => {
+useEffect(() => {
     const fetchData = async () => {
-      try {
-        if (!planetUrl) {
-          const response = await axios(url);
-          const data = response.data;
-          setPlanets(data.results);
-        } else {
-          const response = await axios(planetUrl);
-          const data = response.data;
-          setPlanets(data.results);
-        }
-      } catch (error) {
+    try {
+            const response = await axios(url);
+            const data = response.data;
+            setPlanets(data.results);
+    } catch(error) {
         console.log(error.response);
-      }
-    };
-    fetchData();
-  }, []);
+    }
+};
+fetchData();
+}, [])
+
 
   if (!isActive) {
     return (
@@ -147,7 +135,7 @@ const Planet = () => {
               },
             }}
             variant="outlined"
-            onClick={showLessPlanets}
+            onClick={showPageOne}
           >
             {t("backBtn")}
           </Button>
@@ -162,7 +150,7 @@ const Planet = () => {
               },
             }}
             variant="outlined"
-            onClick={showMorePlanets}
+            onClick={showPageTwo}
           >
             {t("moreBtn")}
           </Button>
@@ -232,7 +220,7 @@ const Planet = () => {
               },
             }}
             variant="outlined"
-            onClick={showLessPlanets}
+            onClick={showPageOne}
           >
             {t("backBtn")}
           </Button>
@@ -247,7 +235,7 @@ const Planet = () => {
               },
             }}
             variant="outlined"
-            onClick={showMorePlanets}
+            onClick={showPageTwo}
           >
             {t("moreBtn")}
           </Button>

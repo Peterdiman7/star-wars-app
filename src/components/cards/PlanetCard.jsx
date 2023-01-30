@@ -1,6 +1,5 @@
 import planetImg from "../../assets/planet.jpg";
 import * as React from "react";
-import { styled } from "@mui/material/styles";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
@@ -8,17 +7,15 @@ import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
 import Typography from "@mui/material/Typography";
 import { useTranslation } from "react-i18next";
+import Header from "../header/Header";
 
 
-export default function CardComponent({ singlePlanet }) {
+const CardComponent = ({ singlePlanet }) => {
   const {t} = useTranslation(["common"]);
-
-React.useEffect(() => {
-  
-}, [])
 
   return (
     <div>
+      <Header />
       <Card sx={{ maxWidth: 345, margin: "auto" }}>
         <CardHeader
           title={`${t("planetName")}` + singlePlanet.name}
@@ -39,3 +36,5 @@ React.useEffect(() => {
     </div>
   );
 }
+
+export default CardComponent;

@@ -15,65 +15,52 @@ const Starship = () => {
   const { t } = useTranslation(["common"]);
 
     const url = "https://swapi.dev/api/starships";
-    const [starshipUrl, setStarshipUrl] = useState();
     const [starships, setStarships] = useState([]);
 
-    function showLessStarships() {
-        let showLessBtn = document.getElementById('showLess');
+    const showPageOne = async () => {
+        const showLessBtn = document.getElementById("showLess");
         showLessBtn.disabled = true;
 
-        let showMoreBtn = document.getElementById('showMore');
+        const showMoreBtn = document.getElementById("showMore");
         showMoreBtn.disabled = false;
 
-        const fetchLess = async () => {
-            try {
-                const response = await axios(url);
-                const data = response.data;
-                setStarshipUrl(data.previous);
-            } catch(error) {
-                console.log(error.response);
-            }
+        try {
+            const response = await axios(url + "?page=1");
+            const data = response.data;
+            setStarships(data.results);
+        } catch (error) {
+            console.log(error.message);
         }
-        fetchLess();
     }
 
-    function showMoreStarships() {
-            let showLessBtn = document.getElementById('showLess');
-            showLessBtn.disabled = false;
+    const showPageTwo = async () => {
+        const showLessBtn = document.getElementById("showLess");
+        showLessBtn.disabled = false;
 
-            let showMoreBtn = document.getElementById('showMore');
-            showMoreBtn.disabled = true;
+        const showMoreBtn = document.getElementById("showMore");
+        showMoreBtn.disabled = true;
 
-            const fetchMore = async () => {
-            try {
-                const response = await axios(url);
-                const data = response.data;
-                setStarshipUrl(data.next);
-            } catch(error) {
-                console.log(error.response);
-            }
+        try {
+            const response = await axios(`${url}?page=2`);
+            const data = response.data;
+            setStarships(data.results);
+        } catch (error) {
+            console.log(error.message);
         }
-        fetchMore();
     }
 
     useEffect(() => {
         const fetchData = async () => {
         try {
-            if(!starshipUrl) {
                 const response = await axios(url);
                 const data = response.data;
                 setStarships(data.results);
-            }else {
-                const response = await axios(starshipUrl);
-                const data = response.data;
-                setStarships(data.results);
-            }
         } catch(error) {
             console.log(error.response);
         }
-    }
+    };
     fetchData();
-}, [starshipUrl])
+}, [])
 
 return(
     <div>
@@ -109,7 +96,7 @@ return(
                     color: "black"
                 }}}
                 variant="outlined"
-                onClick={showLessStarships}
+                onClick={showPageOne}
                 >
                     {t("backBtn")}
                 </Button>
@@ -124,7 +111,7 @@ return(
                 }}}
 
                 variant="outlined"
-                onClick={showMoreStarships}
+                onClick={showPageTwo}
                 >
                     {t("moreBtn")}
                 </Button>

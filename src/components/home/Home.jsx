@@ -2,7 +2,7 @@ import "firebase/compat/auth";
 
 import i18next from "i18next";
 import { useTranslation } from "react-i18next";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 
 import backgroundVideo from "../../assets/intro.mp4";
@@ -11,36 +11,23 @@ import { useEffect } from "react";
 import { auth } from "../../utils/firebase";
 
 const Home = () => {
-  let navigate = useNavigate();
+
+  const navigate = useNavigate();
   const { i18n, t } = useTranslation(["common"]);
-
-  function loginClickBtnHandler() {
-    const user = auth.currentUser;
-
-    if (user) {
-      toast.error(
-        "Error! You are already logged in! You will be redirected...",
-        {
-          icon: "❌",
-          duration: 2000,
-        }
-      );
-      setTimeout(() => {
-        navigate("/planets");
-      }, 2000);
-    } else if (!user) {
-      toast.success("Ready yourself!");
-      setTimeout(() => {
-        navigate("/login");
-      }, 1500);
-    }
-  }
 
   useEffect(() => {
     if (localStorage.getItem("i18nextLng")?.length > 2) {
       i18next.changeLanguage("en");
     }
   }, []);
+
+  const handleLogin = () => {
+    navigate("/login");
+  }
+
+  const handleRegister = () => {
+    navigate("/register");
+  }
 
   const handleLanguageChange = (e) => {
     i18n.changeLanguage(e.target.value);
@@ -49,11 +36,9 @@ const Home = () => {
   return (
     <div className={styles.background}>
       <video src={backgroundVideo} autoPlay loop muted />
-      <Link to="/register">
-        <button className={styles.registerBtn}>
+        <button onClick={handleRegister} className={styles.registerBtn}>
           <p className={styles.registerBtnText}>{t("becomeAJedi")}</p>
         </button>
-      </Link>
       <select
         value={localStorage.getItem("i18nextLng")}
         onChange={handleLanguageChange}
@@ -69,7 +54,7 @@ const Home = () => {
           BG
         </option>
       </select>
-      <button onClick={loginClickBtnHandler} className={styles.loginBtn}>
+      <button onClick={handleLogin} className={styles.loginBtn}>
         <p className={styles.loginBtnText}>{t("alreadyAJedi")}</p>
       </button>
       <Toaster />
