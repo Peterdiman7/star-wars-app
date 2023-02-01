@@ -2,13 +2,12 @@ import "firebase/compat/auth";
 
 import i18next from "i18next";
 import { useTranslation } from "react-i18next";
-import { Link, Navigate, useNavigate } from "react-router-dom";
-import toast, { Toaster } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 import backgroundVideo from "../../assets/intro.mp4";
 import styles from "../home/Home.module.css";
 import { useEffect } from "react";
-import { auth } from "../../utils/firebase";
+import { routing } from "../../routing";
 
 const Home = () => {
 
@@ -22,11 +21,11 @@ const Home = () => {
   }, []);
 
   const handleLogin = () => {
-    navigate("/login");
+    navigate(routing.login);
   }
 
   const handleRegister = () => {
-    navigate("/register");
+    navigate(routing.register);
   }
 
   const handleLanguageChange = (e) => {
@@ -57,7 +56,6 @@ const Home = () => {
       <button onClick={handleLogin} className={styles.loginBtn}>
         <p className={styles.loginBtnText}>{t("alreadyAJedi")}</p>
       </button>
-      <Toaster />
     </div>
   );
 };

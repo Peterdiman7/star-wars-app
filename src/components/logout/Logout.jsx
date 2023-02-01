@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { routing } from "../../routing";
 import { auth } from "../../utils/firebase";
 
 const Logout = () => {
@@ -6,7 +7,7 @@ const Logout = () => {
 
   function logoutUser() {
     auth.signOut();
-    navigate("/");
+    navigate(routing.public);
   }
 
   return (

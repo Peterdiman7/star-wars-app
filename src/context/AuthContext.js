@@ -2,8 +2,6 @@ import { createContext, useContext, useEffect } from "react";
 import {
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
-    // signOut,
-    // onAuthStateChanged
 } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { useState } from "react";

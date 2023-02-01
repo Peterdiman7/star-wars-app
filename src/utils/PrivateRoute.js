@@ -3,14 +3,13 @@ import { UserAuth } from "../context/AuthContext";
 
 import React from "react";
 
-const PrivateRoutes = ({ children }) => {
+const PrivateRoute = ({ children }) => {
   const { user } = UserAuth();
   if (!user) {
     return <Navigate to="/" />;
   }
 
   return children;
-  
 };
 
-export default PrivateRoutes;
+export default PrivateRoute;

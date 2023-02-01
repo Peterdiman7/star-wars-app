@@ -14,7 +14,7 @@ import Register from "./components/register/Register";
 import { Toaster } from "react-hot-toast";
 import AddPilotDialog from "./components/dialog/AddPilotDialog";
 import { AuthContextProvider } from "./context/AuthContext";
-import PrivateRoutes from "./utils/PrivateRoutes";
+import PrivateRoute from "./utils/PrivateRoute";
 import PublicRoutes from "./utils/PublicRoutes";
 
 function App() {
@@ -23,13 +23,13 @@ function App() {
       <Suspense fallback={"Loading..."}>
         <AuthContextProvider>
             <Routes>
-              <Route path="/main" element={<PrivateRoutes> <MainPage /> </PrivateRoutes>} />
-              <Route path="/planets" element={<PrivateRoutes> <Planet /> </PrivateRoutes>} />
-              <Route path="/planets/:id" element={ <PrivateRoutes> <Details /> </PrivateRoutes>} />
-              <Route path="/starships" element={ <PrivateRoutes> <Starship /> </PrivateRoutes>} />
-              <Route path="/starships/:id" element={<PrivateRoutes> <StarshipDetails /> </PrivateRoutes>} />
-              <Route path="/dialog" element={ <PrivateRoutes> <AddPilotDialog /> </PrivateRoutes> } />
-              <Route path="/pilots" element={<PrivateRoutes> <Pilots /> </PrivateRoutes>} />
+              <Route path="/main" element={<PrivateRoute> <MainPage /> </PrivateRoute>} />
+              <Route path="/planets" element={<PrivateRoute> <Planet /> </PrivateRoute>} />
+              <Route path="/planets/:id" element={ <PrivateRoute> <Details /> </PrivateRoute>} />
+              <Route path="/starships" element={ <PrivateRoute> <Starship /> </PrivateRoute>} />
+              <Route path="/starships/:id" element={<PrivateRoute> <StarshipDetails /> </PrivateRoute>} />
+              <Route path="/dialog" element={ <PrivateRoute> <AddPilotDialog /> </PrivateRoute> } />
+              <Route path="/pilots" element={<PrivateRoute> <Pilots /> </PrivateRoute>} />
               <Route path="/" exact element={ <PublicRoutes> <Home /> </PublicRoutes> } />
               <Route path="/login" element={<PublicRoutes> <Login /> </PublicRoutes>} />
               <Route path="/register" element={<PublicRoutes> <Register /> </PublicRoutes>} />

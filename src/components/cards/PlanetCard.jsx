@@ -7,34 +7,29 @@ import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
 import Typography from "@mui/material/Typography";
 import { useTranslation } from "react-i18next";
-import Header from "../header/Header";
-
 
 const CardComponent = ({ singlePlanet }) => {
-  const {t} = useTranslation(["common"]);
+  const { t } = useTranslation(["common"]);
 
   return (
-    <div>
-      <Header />
-      <Card sx={{ maxWidth: 345, margin: "auto" }}>
-        <CardHeader
-          title={`${t("planetName")}` + singlePlanet.name}
-          subheader={singlePlanet.climate  + `${t("climate")}`}
-        />
-        <CardMedia component="img" height="190" image={planetImg} />
-        <CardContent>
-          <Typography variant="body2" color="text.secondary">
-            {t("terrain")} {singlePlanet.terrain}
-            <br />
-            {t("population")} {singlePlanet.population}
-            <br />
-            {t("diameter")} {singlePlanet.diameter}
-          </Typography>
-        </CardContent>
-        <CardActions disableSpacing></CardActions>
-      </Card>
-    </div>
+    <Card sx={{ maxWidth: 345, margin: "auto" }}>
+      <CardHeader
+        title={`${t("planetName")} ${singlePlanet.name}`}
+        subheader={singlePlanet.climate + `${t("climate")}`}
+      />
+      <CardMedia component="img" height="190" image={planetImg} />
+      <CardContent>
+        <Typography variant="body2" color="text.secondary">
+          {t("terrain")} {singlePlanet.terrain}
+          <br />
+          {t("population")} {singlePlanet.population}
+          <br />
+          {t("diameter")} {singlePlanet.diameter}
+        </Typography>
+      </CardContent>
+      <CardActions disableSpacing></CardActions>
+    </Card>
   );
-}
+};
 
 export default CardComponent;

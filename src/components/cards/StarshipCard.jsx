@@ -10,52 +10,49 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useTranslation } from "react-i18next";
-import Header from "../header/Header";
 import { useState } from "react";
 
-
 export default function CardComponent({ singleStarship, starshipId }) {
-
   const [isActive, setIsActive] = useState(false);
 
-  const likeClickHandler = () => {
-    console.log(starshipId);
-    };
+  let starshipArr = [];
 
+  function handleLike (e) {
+    console.log(starshipId);
+    starshipArr.push(starshipId);  
+    console.log(starshipArr);
+  }
   const { t } = useTranslation(["common"]);
 
   return (
-    <div>
-      <Header />
-      <Card sx={{ maxWidth: 345, margin: "auto" }}>
-        <CardHeader
-          title={`${t("starshipName")}` + singleStarship.name}
-          subheader={singleStarship.model + `${t("model")}`}
-        />
-        <CardMedia component="img" height="190" image={starshipImg} />
-        <CardContent>
-          <Typography variant="body2" color="text.secondary">
-            {t("hyperdrive")} {singleStarship.hyperdrive_rating}
-            <br />
-            {t("manufacturer")} {singleStarship.manufacturer}
-            <br />
-            {t("maxSpeed")} {singleStarship.max_atmosphering_speed}
-            <br />
-            {t("maxPassengers")} {singleStarship.passengers}
-          </Typography>
-        </CardContent>
-        <CardActions disableSpacing>
-          <IconButton
-            id="likeButton"
-            className={`${styles.likeBtn} 
+    <Card sx={{ maxWidth: 345, margin: "auto" }}>
+      <CardHeader
+        title={`${t("starshipName")} ${singleStarship.name}`}
+        subheader={`${singleStarship.model} ${t("model")}`}
+      />
+      <CardMedia component="img" height="190" image={starshipImg} />
+      <CardContent>
+        <Typography variant="body2" color="text.secondary">
+          {t("hyperdrive")} {singleStarship.hyperdrive_rating}
+          <br />
+          {t("manufacturer")} {singleStarship.manufacturer}
+          <br />
+          {t("maxSpeed")} {singleStarship.max_atmosphering_speed}
+          <br />
+          {t("maxPassengers")} {singleStarship.passengers}
+        </Typography>
+      </CardContent>
+      <CardActions disableSpacing>
+        <IconButton
+          id="likeButton"
+          className={`${styles.likeBtn} 
             ${isActive ? `${styles.active}` : ""}`}
-            onClick={likeClickHandler}
-            aria-label="add to favorites"
-          >
-            <FavoriteIcon />
-          </IconButton>
-        </CardActions>
-      </Card>
-    </div>
+          aria-label="add to favorites"
+          onClick={handleLike}
+        >
+          <FavoriteIcon />
+        </IconButton>
+      </CardActions>
+    </Card>
   );
 }

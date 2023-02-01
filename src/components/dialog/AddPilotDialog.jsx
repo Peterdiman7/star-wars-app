@@ -10,7 +10,6 @@ import results from "../../results";
 import styles from "../dialog/AddPilotDialog.module.css";
 
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { InputLabel, MenuItem, Select } from "@mui/material";
@@ -18,42 +17,44 @@ import { useTranslation } from "react-i18next";
 
 import useFetch from "../../useFetch";
 
+import { useNavigate } from "react-router-dom";
+import { routing } from "../../routing";
+
 const AddPilotDialog = () => {
   const { t } = useTranslation(["common"]);
 
-  // Custom Hook
   const { data } = useFetch("https://swapi.dev/api/starships");
-  const [open, setOpen] = React.useState(false);
+  const [isOpen, setIsOpen] = React.useState(false);
 
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   function candidatesListHandler(e) {
     e.preventDefault();
     handleClose();
-    navigate("/pilots");
+    navigate(routing.pilots);
   }
 
   const handleClickOpen = () => {
-    setOpen(true);
+    setIsOpen(true);
   };
 
   const handleClose = () => {
-    setOpen(false);
+    setIsOpen(false);
   };
 
   const validationSchema = Yup.object({
     name: Yup.string().required("Required!"),
     email: Yup.string()
-      .email("You must enter a valid e-mail adress!")
-      .required("Required!"),
-    date: Yup.date().required("Required!"),
+      .email(`${t("validEmail")}`)
+      .required(`${t("required")}`),
+    date: Yup.date().required(`${t("required")}`),
     experience: Yup.number()
-      .min(0, "You cannot enter a negative number!")
-      .integer("Must be an integer!")
-      .required("Required!"),
+      .min(0, `${t("negativeNum")}`)
+      .integer(`${t("integer")}`)
+      .required(`${t("required")}`),
     starshipName: Yup.string()
-      .min(3, "Starship name must be at least three letters long!")
-      .required("Required!"),
+      .min(3, `${t("starshipNameLength")}`)
+      .required(`${t("required")}`),
   });
 
   const formik = useFormik({
@@ -68,7 +69,7 @@ const AddPilotDialog = () => {
     onSubmit: (values) => {
       results.post("/pilots.json", values);
       toast.success(
-        "Aplication Successful! You will be redirected to Pilots page!",
+        `${t("applicationSuccessful")}`,
         {
           duration: 3000,
           position: "top-center",
@@ -79,15 +80,15 @@ const AddPilotDialog = () => {
         }
       );
       setTimeout(() => {
-        setOpen(false);
-        navigate("/pilots");
+        setIsOpen(false);
+        navigate(routing.pilots);
       }, 3000);
     },
     validationSchema,
   });
 
   return (
-    <div>
+    <>
       <Button
         className={styles.pilotsBtn}
         sx={{ color: "white" }}
@@ -95,7 +96,7 @@ const AddPilotDialog = () => {
       >
         {t("pilotsHeader")}
       </Button>
-      <Dialog open={open} onClose={handleClose}>
+      <Dialog open={isOpen} onClose={handleClose}>
         <form onSubmit={formik.handleSubmit}>
           <DialogTitle>{t("applicationForm")}</DialogTitle>
           <DialogContent>
@@ -238,7 +239,7 @@ const AddPilotDialog = () => {
           </DialogActions>
         </form>
       </Dialog>
-    </div>
+    </>
   );
 };
 

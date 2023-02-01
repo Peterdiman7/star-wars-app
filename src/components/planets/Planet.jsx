@@ -5,21 +5,22 @@ import Header from "../header/Header";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { planetId }  from "../../utils/arrSplit";
+import { planetId } from "../../utils/arrSplit";
 
 import styles from "../planets/Planet.module.css";
 import { useTranslation } from "react-i18next";
 
 const Planet = () => {
-  const {t} = useTranslation(["common"]);
-
-  const url = "https://swapi.dev/api/planets";
+  const { t } = useTranslation(["common"]);
 
   const [planets, setPlanets] = useState([]);
   const [query, setQuery] = useState("");
   const [isActive, setIsActive] = useState(true);
-  
-  const climateArr = [];
+  const [counter, setCounter] = useState(1);
+
+  const climateArr = planets.map(planet => planet.climate);
+
+  const url = `https://swapi.dev/api/planets`;
 
   function filterByResidentsClickHandler() {
     setIsActive((current) => !current);
@@ -27,50 +28,53 @@ const Planet = () => {
 
   planets.forEach((planet) => climateArr.push(planet.climate));
   const showPageOne = async () => {
-    const showLessBtn = document.getElementById("showLess");
+
+    const showLessBtn = document.querySelector("#showLess");
     showLessBtn.disabled = true;
 
-    const showMoreBtn = document.getElementById("showMore");
+    const showMoreBtn = document.querySelector("#showMore");
     showMoreBtn.disabled = false;
 
     try {
-        const response = await axios(url + "?page=1");
-        const data = response.data;
-        setPlanets(data.results);
+      const response = await axios(`${url}?page=${counter}`);
+      const data = response.data;
+      setPlanets(data.results);
     } catch (error) {
-        console.log(error.message);
+      console.log(error.message);
     }
-}
+  };
 
-const showPageTwo = async () => {
-    const showLessBtn = document.getElementById("showLess");
+  const showPageTwo = async () => {
+    const showLessBtn = document.querySelector("#showLess");
     showLessBtn.disabled = false;
-
-    const showMoreBtn = document.getElementById("showMore");
+    
+    const showMoreBtn = document.querySelector("#showMore");
     showMoreBtn.disabled = true;
-
+    
     try {
-        const response = await axios(`${url}?page=2`);
+
+      const response = await axios(`${url}?page=${counter + 1}`);
+      const data = response.data;
+      setPlanets(data.results);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  useEffect(() => {
+    const showLessBtn = document.querySelector("#showLess");
+    showLessBtn.disabled = true;
+    const fetchData = async () => {
+      try {
+        const response = await axios(`${url}?page=${counter}`);
         const data = response.data;
         setPlanets(data.results);
-    } catch (error) {
-        console.log(error.message);
-    }
-}
-
-useEffect(() => {
-    const fetchData = async () => {
-    try {
-            const response = await axios(url);
-            const data = response.data;
-            setPlanets(data.results);
-    } catch(error) {
+      } catch (error) {
         console.log(error.response);
-    }
-};
-fetchData();
-}, [])
-
+      }
+    };
+    fetchData();
+  }, []);
 
   if (!isActive) {
     return (

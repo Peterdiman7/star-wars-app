@@ -13,28 +13,28 @@ import AddPilotDialog from "../dialog/AddPilotDialog";
 
 import { useTranslation } from "react-i18next";
 import { auth } from "../../utils/firebase";
+import { routing } from "../../routing";
+import LanguageSelector from "../languageSelector/LanguageSelector";
 
 const Header = () => {
 
+  const { t } = useTranslation(["common"]);
+
+
   const navigate = useNavigate();
 
-  const { t } = useTranslation(["common"]);
 
   function logoutHandler() {
     auth.signOut();
-    navigate("/");
+    navigate(routing.public);
     }
 
-  function mainPageClickHandler() {
-    navigate("/main");
-  }
-
   function starshipsBtnClick() {
-    navigate("/starships");
+    navigate(routing.starships);
   }
 
   function planetsBtnClick() {
-    navigate("/planets");
+    navigate(routing.planets);
   }
 
   return (
@@ -46,7 +46,7 @@ const Header = () => {
       >
         <Toolbar>
           <Button sx={{ color: "white" }}>
-            <HouseIcon onClick={() => navigate("/main")} />
+            <HouseIcon onClick={() => navigate(routing.main)} />
           </Button>
           <Typography
           className={styles.heading}
@@ -60,6 +60,10 @@ const Header = () => {
             color="inherit">
             {t("planetsHeader")}
           </Button>
+          <Button>
+            <LanguageSelector />
+          </Button>
+
           <Button
             onClick={starshipsBtnClick}
             className={styles.starshipsBtn}
@@ -67,6 +71,7 @@ const Header = () => {
           >
             {t("starshipsHeader")}
           </Button>
+         
           <AddPilotDialog />
           <LogoutIcon onClick={logoutHandler} />
         </Toolbar>
