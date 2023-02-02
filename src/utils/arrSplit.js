@@ -1,4 +1,4 @@
-export default function planetId (url) {
+export function planetId (url) {
     let planetIdArr = url.split('/');
     return +planetIdArr[5];
 }

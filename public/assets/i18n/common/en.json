@@ -35,6 +35,22 @@
     "maxPassengers": "Max Passengers: ",
     "apply": "Apply",
     "cancel": "Cancel",
-    "allCandidates": "All candidates"
+    "allCandidates": "All candidates",
+    "validEmail": "You must enter a valid e-mail adress!",
+    "required": "Required!",
+    "negativeNum": "Must be a positive integer!",
+    "integer": "Must be an round number!",
+    "starshipNameLength": "Starship name must be at least three letters long!",
+    "applicationSuccessful": "Application Successful! ",
+    "enterEmail": "E-mail adress...",
+    "enterPassword": "Password...",
+
+    "startInput": "Starting date: ",
+    "starshipInput": "Starship: ",
+    "experienceInput": "Experience: ",
+    "flightHours": "flight hours",
+    "emailInput": "E-mail adress: "
+
+
 
 }

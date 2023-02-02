@@ -9,16 +9,21 @@ import { useState } from "react";
 import Header from "../header/Header";
 
 import styles from "../pilots/Pilots.module.css";
+import { auth } from "../../utils/firebase";
+import { useTranslation } from "react-i18next";
 
 function Pilots() {
-  let url =
+  const { t } = useTranslation(["common"]);
+  const url =
     "https://react-star-wars-a9613-default-rtdb.firebaseio.com/pilots.json";
-
   const [pilots, setPilots] = useState([]);
 
-  const pilotsArr = [];
-
+  const user = auth.currentUser;
+  
   React.useEffect(() => {
+
+    const pilotsArr = [];
+
     const fetchPilots = async () => {
       try {
         const response = await axios(url);
@@ -35,39 +40,34 @@ function Pilots() {
       }
     };
     fetchPilots();
-  }, [pilots])
+  }, []);
 
   return (
     <>
       <Header />
       <div className={styles.cardContainer}>
-      {pilots.map((pilot) => (
-        <Card
-        className={styles.pilotCard}
-        sx={{ maxWidth: 345 }}>
-          <CardMedia
-            sx={{ height: 200 }}
-            image={pilot.image}
-          />
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="div">
-              {pilot.name}
-            </Typography>
-          
-            <Typography variant="body2" color="text.secondary">
-                Starting date: {pilot.date}
+        {pilots.map((pilot) => (
+          <Card className={styles.pilotCard} sx={{ maxWidth: 200 }}>
+            <CardMedia sx={{ height: 200 }} image={pilot.image} />
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="div">
+                {pilot.name}
+              </Typography>
+
+              <Typography variant="body2" color="text.secondary">
+                {t("startInput")} {pilot.date}
                 <br />
-                Starship: {pilot.starshipName}
+                {t("starshipInput")} {pilot.starshipName}
                 <br />
-                Experience: {pilot.experience} flight hours
+                {t("experienceInput")} {pilot.experience} {t("flightHours")}
                 <br />
-                E-mail: {pilot.email}
-            </Typography>
-          </CardContent>
-        </Card>
-      ))}
-    </div>
-</>
+                {t("emailInput")} {pilot.email}
+              </Typography>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+    </>
   );
 }
 

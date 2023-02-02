@@ -9,8 +9,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import results from "../../results";
 import styles from "../dialog/AddPilotDialog.module.css";
 
-import toast, { Toaster } from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { InputLabel, MenuItem, Select } from "@mui/material";
@@ -18,42 +17,44 @@ import { useTranslation } from "react-i18next";
 
 import useFetch from "../../useFetch";
 
-const AddPilotDialog = () =>  {
-const { t } = useTranslation(["common"]);
+import { useNavigate } from "react-router-dom";
+import { routing } from "../../routing";
 
-// Custom Hook
-const { data } = useFetch("https://swapi.dev/api/starships");
+const AddPilotDialog = () => {
+  const { t } = useTranslation(["common"]);
 
-  const [open, setOpen] = React.useState(false);
+  const { data } = useFetch("https://swapi.dev/api/starships");
+  const [isOpen, setIsOpen] = React.useState(false);
 
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   function candidatesListHandler(e) {
     e.preventDefault();
     handleClose();
-    navigate("/pilots");
+    navigate(routing.pilots);
   }
 
   const handleClickOpen = () => {
-    setOpen(true);
+    setIsOpen(true);
   };
 
   const handleClose = () => {
-    setOpen(false);
+    setIsOpen(false);
   };
 
   const validationSchema = Yup.object({
     name: Yup.string().required("Required!"),
     email: Yup.string()
-      .email("You must enter a valid e-mail adress!")
-      .required("Required!"),
-    date: Yup.date().required("Required!"),
+      .email(`${t("validEmail")}`)
+      .required(`${t("required")}`),
+    date: Yup.date().required(`${t("required")}`),
     experience: Yup.number()
-      .min(0, "You cannot enter a negative number!")
-      .required("Required!"),
+      .min(0, `${t("negativeNum")}`)
+      .integer(`${t("integer")}`)
+      .required(`${t("required")}`),
     starshipName: Yup.string()
-      .min(3, "Starship name must be at least three letters long!")
-      .required("Required!"),
+      .min(3, `${t("starshipNameLength")}`)
+      .required(`${t("required")}`),
   });
 
   const formik = useFormik({
@@ -68,7 +69,7 @@ const { data } = useFetch("https://swapi.dev/api/starships");
     onSubmit: (values) => {
       results.post("/pilots.json", values);
       toast.success(
-        "Aplication Successful! You will be redirected to Pilots page!",
+        `${t("applicationSuccessful")}`,
         {
           duration: 3000,
           position: "top-center",
@@ -79,28 +80,27 @@ const { data } = useFetch("https://swapi.dev/api/starships");
         }
       );
       setTimeout(() => {
-        setOpen(false);
-        navigate("/pilots");
+        setIsOpen(false);
+        navigate(routing.pilots);
       }, 3000);
     },
     validationSchema,
   });
 
   return (
-    <div>
+    <>
       <Button
-      className={styles.pilotsBtn}
-      sx={{ color: "white" }} 
-      onClick={handleClickOpen}>
+        className={styles.pilotsBtn}
+        sx={{ color: "white" }}
+        onClick={handleClickOpen}
+      >
         {t("pilotsHeader")}
       </Button>
-      <Dialog open={open} onClose={handleClose}>
+      <Dialog open={isOpen} onClose={handleClose}>
         <form onSubmit={formik.handleSubmit}>
           <DialogTitle>{t("applicationForm")}</DialogTitle>
           <DialogContent>
-            <DialogContentText>
-              {t("applicationDesc")}
-            </DialogContentText>
+            <DialogContentText>{t("applicationDesc")}</DialogContentText>
 
             <TextField
               onChange={formik.handleChange}
@@ -236,12 +236,11 @@ const { data } = useFetch("https://swapi.dev/api/starships");
             >
               {t("apply")}
             </Button>
-            <Toaster position="bottom-center" reverseOrder={true} />
           </DialogActions>
         </form>
       </Dialog>
-    </div>
+    </>
   );
-}
+};
 
 export default AddPilotDialog;

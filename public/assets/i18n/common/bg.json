@@ -35,7 +35,20 @@
     "maxPassengers": "Макс. Пътници: ",
     "apply": "Приложи",
     "cancel": "Затвори",
-    "allCandidates": "Всички кандидати"
+    "allCandidates": "Всички кандидати",
+    "validEmail": "Въведете валиден И-мейл адрес!",
 
+    "required": "Задължително поле*",
+    "negativeNum": "Опитът трябва да е положително число!",
+    "integer": "Опитът трябва да е цяло число!",
+    "starshipNameLength": "Името на кораба трябва да е мин. 3 символа!",
+    "applicationSuccessful": "Кандидатствахте Успешно! ",
+    "enterEmail": "И-мейл адрес...",
+    "enterPassword": "Парола...",
+    "startInput": "Дата на започване: ",
+    "starshipInput": "Космически кораб: ",
+    "experienceInput": "Опит: ",
+    "flightHours": "летателни часове",
+    "emailInput": "И-мейл адрес: "
 
 }

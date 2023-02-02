@@ -5,78 +5,70 @@ import Header from "../header/Header";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import planetId from "../../utils/arrSplit";
+import { planetId } from "../../utils/arrSplit";
 
 import styles from "../planets/Planet.module.css";
 import { useTranslation } from "react-i18next";
 
 const Planet = () => {
-  const {t} = useTranslation(["common"]);
+  const { t } = useTranslation(["common"]);
 
-  const url = "https://swapi.dev/api/planets";
-
-  const [planetUrl, setPlanetUrl] = useState();
   const [planets, setPlanets] = useState([]);
   const [query, setQuery] = useState("");
   const [isActive, setIsActive] = useState(true);
-  
-  const climateArr = [];
+  const [counter, setCounter] = useState(1);
+
+  const climateArr = planets.map(planet => planet.climate);
+
+  const url = `https://swapi.dev/api/planets`;
 
   function filterByResidentsClickHandler() {
     setIsActive((current) => !current);
   }
 
   planets.forEach((planet) => climateArr.push(planet.climate));
-  function showLessPlanets() {
-    let showLessBtn = document.getElementById("showLess");
+  const showPageOne = async () => {
+
+    const showLessBtn = document.querySelector("#showLess");
     showLessBtn.disabled = true;
 
-    let showMoreBtn = document.getElementById("showMore");
+    const showMoreBtn = document.querySelector("#showMore");
     showMoreBtn.disabled = false;
 
-    const fetchLess = async () => {
-      try {
-        const response = await axios(url);
-        const data = response.data;
-        setPlanetUrl(data.previous);
-      } catch (error) {
-        console.log(error.response);
-      }
-    };
-    fetchLess();
-  }
+    try {
+      const response = await axios(`${url}?page=${counter}`);
+      const data = response.data;
+      setPlanets(data.results);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
-  function showMorePlanets() {
-    let showLessBtn = document.getElementById("showLess");
+  const showPageTwo = async () => {
+    const showLessBtn = document.querySelector("#showLess");
     showLessBtn.disabled = false;
-
-    let showMoreBtn = document.getElementById("showMore");
+    
+    const showMoreBtn = document.querySelector("#showMore");
     showMoreBtn.disabled = true;
+    
+    try {
 
-    const fetchMore = async () => {
-      try {
-        const response = await axios(url);
-        const data = response.data;
-        setPlanetUrl(data.next);
-      } catch (error) {
-        console.log(error.response);
-      }
-    };
-    fetchMore();
-  }
+      const response = await axios(`${url}?page=${counter + 1}`);
+      const data = response.data;
+      setPlanets(data.results);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
   useEffect(() => {
+    const showLessBtn = document.querySelector("#showLess");
+    showLessBtn.disabled = true;
     const fetchData = async () => {
       try {
-        if (!planetUrl) {
-          const response = await axios(url);
-          const data = response.data;
-          setPlanets(data.results);
-        } else {
-          const response = await axios(planetUrl);
-          const data = response.data;
-          setPlanets(data.results);
-        }
+        const response = await axios(`${url}?page=${counter}`);
+        const data = response.data;
+        setPlanets(data.results);
       } catch (error) {
         console.log(error.response);
       }
@@ -147,7 +139,7 @@ const Planet = () => {
               },
             }}
             variant="outlined"
-            onClick={showLessPlanets}
+            onClick={showPageOne}
           >
             {t("backBtn")}
           </Button>
@@ -162,7 +154,7 @@ const Planet = () => {
               },
             }}
             variant="outlined"
-            onClick={showMorePlanets}
+            onClick={showPageTwo}
           >
             {t("moreBtn")}
           </Button>
@@ -232,7 +224,7 @@ const Planet = () => {
               },
             }}
             variant="outlined"
-            onClick={showLessPlanets}
+            onClick={showPageOne}
           >
             {t("backBtn")}
           </Button>
@@ -247,7 +239,7 @@ const Planet = () => {
               },
             }}
             variant="outlined"
-            onClick={showMorePlanets}
+            onClick={showPageTwo}
           >
             {t("moreBtn")}
           </Button>

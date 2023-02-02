@@ -1,71 +1,63 @@
-import { auth } from "../../utils/firebase";
 import { useNavigate } from "react-router-dom";
-import toast, { Toaster } from "react-hot-toast";
 
 import styles from "../register/Register.module.css";
 import { useTranslation } from "react-i18next";
+import { useState } from "react";
+import { UserAuth } from "../../context/AuthContext";
+import { auth } from "../../utils/firebase";
+import toast from "react-hot-toast";
+import { routing } from "../../routing";
 
 const Login = () => {
-  
   const navigate = useNavigate();
   const { t } = useTranslation(["common"]);
 
-  const OnLoginFormSubmitHandler = (e) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const { signIn } = UserAuth();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    let username = e.target.username.value;
-    let password = e.target.password.value;
-      auth.
-      signInWithEmailAndPassword(username, password)
-        .then((userCredentials) => {
-  
-          toast.success(
-            "Login Successful!",
-            {
-              duration: 3000,
-              position: "top-center",
-              iconTheme: {
-                primary: "#A4DE02",
-                secondary: "#fff",
-              },
-            }
-          );
-          setTimeout(() => {
-            navigate("/main");
-          }, 3000);
-        });
+    const user = auth.currentUser;
+    console.log(user);
+    if(!auth.currentUser){
+    try {
+      await signIn(email, password);
+      navigate(routing.main);
+    } catch (error) {
+      toast.error(error.message);
+    }
   }
-    
-  return (
-    <div className={styles.form}>
-      <form onSubmit={OnLoginFormSubmitHandler}>
-        <div className={styles.title}>{t("welcome")}</div>
-        <div className={styles.subtitle}>{t("loginHere")}</div>
-        <div className={styles.inputContainer}>
-          <input
-            name="username"
-            id="firstname"
-            className={styles.emailInput}
-            type="text"
-            placeholder="E-mail..."
-          />
-        </div>
-        <div className={styles.inputContainer}>
-          <input
-            name="password"
-            id="lastname"
-            className={styles.passwordInput}
-            type="password"
-            placeholder="Password..."
-          />
-        </div>
-        <button type="submit" className={styles.submit}>
-          {t("submit")}
-        </button>
-        <Toaster position="top-center" reverseOrder={true} />
-      </form>
-    </div>
-  );
-}
+
+  }
+    return (
+        <form className={styles.form} onSubmit={handleSubmit}>
+          <p className={styles.title}>{t("welcome")}</p>
+          <p className={styles.subtitle}>{t("loginHere")}</p>
+          <div className={styles.inputContainer}>
+            <input
+            onChange={(e) => setEmail(e.target.value)}
+              name="username"
+              className={styles.emailInput}
+              type="text"
+              placeholder={t("enterEmail")}
+            />
+          </div>
+          <div className={styles.inputContainer}>
+            <input
+            onChange={(e) => setPassword(e.target.value)}
+              name="password"
+              className={styles.passwordInput}
+              type="password"
+              placeholder={t("enterPassword")}
+            />
+          </div>
+          <button type="submit" className={styles.submit}>
+            {t("submit")}
+          </button>
+        </form>
+    );
+};
 
 export default Login;
