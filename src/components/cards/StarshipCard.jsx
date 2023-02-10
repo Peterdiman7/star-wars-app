@@ -11,18 +11,28 @@ import Typography from "@mui/material/Typography";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
+import { getCacheVal, setCacheVal } from "../../utils/localStorageGetter";
 
 export default function CardComponent({ singleStarship, starshipId }) {
   const [isActive, setIsActive] = useState(false);
 
-  let starshipArr = [];
-
-  function handleLike (e) {
-    console.log(starshipId);
-    starshipArr.push(starshipId);  
-    console.log(starshipArr);
-  }
   const { t } = useTranslation(["common"]);
+
+
+
+  function handleLike(starshipId) {
+    setIsActive(current => !current);
+    let starshipArr = getCacheVal("liked");
+    
+    if(!starshipArr){
+      starshipArr = [];
+    } 
+    if(!starshipArr.includes(starshipId)){
+    starshipArr.push(starshipId);
+        setCacheVal("liked", starshipArr);
+      }
+      console.log(starshipArr);
+  }
 
   return (
     <Card sx={{ maxWidth: 345, margin: "auto" }}>
@@ -48,7 +58,7 @@ export default function CardComponent({ singleStarship, starshipId }) {
           className={`${styles.likeBtn} 
             ${isActive ? `${styles.active}` : ""}`}
           aria-label="add to favorites"
-          onClick={handleLike}
+          onClick={() => handleLike(starshipId)}
         >
           <FavoriteIcon />
         </IconButton>

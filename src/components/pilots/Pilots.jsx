@@ -9,16 +9,12 @@ import { useState } from "react";
 import Header from "../header/Header";
 
 import styles from "../pilots/Pilots.module.css";
-import { auth } from "../../utils/firebase";
 import { useTranslation } from "react-i18next";
 
 function Pilots() {
   const { t } = useTranslation(["common"]);
-  const url =
-    "https://react-star-wars-a9613-default-rtdb.firebaseio.com/pilots.json";
+  const url = "https://react-star-wars-a9613-default-rtdb.firebaseio.com/pilots.json";
   const [pilots, setPilots] = useState([]);
-
-  const user = auth.currentUser;
   
   React.useEffect(() => {
 
@@ -47,7 +43,7 @@ function Pilots() {
       <Header />
       <div className={styles.cardContainer}>
         {pilots.map((pilot) => (
-          <Card className={styles.pilotCard} sx={{ maxWidth: 200 }}>
+          <Card key={pilot.name} className={styles.pilotCard} sx={{ maxWidth: 200 }}>
             <CardMedia sx={{ height: 200 }} image={pilot.image} />
             <CardContent>
               <Typography gutterBottom variant="h5" component="div">

@@ -10,7 +10,6 @@ import { useEffect } from "react";
 import { routing } from "../../routing";
 
 const Home = () => {
-
   const navigate = useNavigate();
   const { i18n, t } = useTranslation(["common"]);
 
@@ -22,11 +21,11 @@ const Home = () => {
 
   const handleLogin = () => {
     navigate(routing.login);
-  }
+  };
 
   const handleRegister = () => {
     navigate(routing.register);
-  }
+  };
 
   const handleLanguageChange = (e) => {
     i18n.changeLanguage(e.target.value);
@@ -35,9 +34,9 @@ const Home = () => {
   return (
     <div className={styles.background}>
       <video src={backgroundVideo} autoPlay loop muted />
-        <button onClick={handleRegister} className={styles.registerBtn}>
-          <p className={styles.registerBtnText}>{t("becomeAJedi")}</p>
-        </button>
+      <button onClick={handleRegister} className={styles.registerBtn}>
+        <p className={styles.registerBtnText}>{t("becomeAJedi")}</p>
+      </button>
       <select
         value={localStorage.getItem("i18nextLng")}
         onChange={handleLanguageChange}
