@@ -79,7 +79,6 @@ const Planet = () => {
   if (!isActive) {
     return (
       <div>
-        <Header />
         <div className={styles.filterBtnContainer}>
           <input
             onChange={(e) => setQuery(e.target.value)}
@@ -164,7 +163,6 @@ const Planet = () => {
   } else {
     return (
       <div>
-        <Header />
         <div className={styles.filterBtnContainer}>
           <input
             onChange={(e) => setQuery(e.target.value)}

@@ -6,7 +6,6 @@ import Typography from "@mui/material/Typography";
 
 import axios from "axios";
 import { useState } from "react";
-import Header from "../header/Header";
 
 import styles from "../pilots/Pilots.module.css";
 import { useTranslation } from "react-i18next";
@@ -40,7 +39,6 @@ function Pilots() {
 
   return (
     <>
-      <Header />
       <div className={styles.cardContainer}>
         {pilots.map((pilot) => (
           <Card key={pilot.name} className={styles.pilotCard} sx={{ maxWidth: 200 }}>

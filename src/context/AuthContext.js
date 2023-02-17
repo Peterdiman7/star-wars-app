@@ -5,6 +5,7 @@ import {
 } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { useState } from "react";
+import { getCacheVal, setCacheVal } from "../utils/localStorageGetter";
 
 const UserContext = createContext();
 
@@ -20,6 +21,8 @@ export const AuthContextProvider = ({ children }) => {
   };
 
   useEffect(() => {
+    const likedStarships = getCacheVal("liked");
+    !likedStarships?.length && setCacheVal("liked", []);
     const unsubscribe = auth.onAuthStateChanged((currentUser) => {
       setUser(currentUser);
     });

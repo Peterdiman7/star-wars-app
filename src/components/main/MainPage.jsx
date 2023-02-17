@@ -9,7 +9,6 @@ const MainPage = () => {
 
   return (
     <div>
-      <Header />
       <div className={styles.titleContainer}>
         <h1 className={styles.title}>{t("starWarsWelcomeTitle")}</h1>
       </div>

@@ -64,7 +64,6 @@ const Starship = () => {
 
 return(
     <div>
-        <Header />
             <Grid container 
                 sx={{justifyContent: "center", alignContent: "center", alignSelf: "center", marginTop: 10 }} rowSpacing={5} columnSpacing={5}>
                 {starships.map((starship) => (
