@@ -19,52 +19,37 @@ You may also see any lint errors in the console.
 Launches the test runner in the interactive watch mode.\
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+### Main Idea
+This React application is based on one of the most popular sagas in history of movies and television.
+Star-wars-app gives you the opportunity to take a peak into the World of Star Wars.
+Its main idea is to deliver a web-app where everything is in one place thanks to the Swapi.dev.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### `register page`
+  -You can easily make an account to start gazing into the vast Universe of Star Wars.
+  -Easy as always, just click the button "Become a JEDI!" and enter your credentials. 
+  -Don't try to cheat the system. No account - no information. :)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### `login page`
+  -If you already have an account, just click on the button "Already a JEDI?" and you can enter your credentials.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### `language change`
+  -Thanks to the latest updates, now you can easily switch between the languages(Bulgarian and English currently)
 
-### `npm run eject`
+### `main page`
+  -You could browse through one of the most popular characters in the saga;
+  -Whether it is Master Yoda or Darth Vader, you will have the opportunity to click on the character's image and get redirected to one of the most powerful tools in all Internet - Google with more information about the chosen character.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### `planets page`
+  -Clicking on it you'll get a peak of the vast Universe of Star Wars. You can switch between the planets to see more details about them, thanks to the Star Wars API.
+  -By filtering climate, you can get only the planets you are looking for. Just type: "arid", "temperate", "tropical" etc..
+  -By filtering residents, you can get only the planets with more than 10 residents, according to Swapi.dev. Just click it and see the magic.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### `starships page`
+  -Clicking on it you'll get a peak of the vast Universe of Star Wars. You can switch between the starships to see more details about them, thanks to the Star Wars API.
+  -You can drop a like if you like the starship. The likes persist even if you log out. How cool is that!
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### `pilots page`
+  -Clicking on it a modal will appear. You can become the pilot you've always wanted! Jusyt enter your data and Boom! You can even see your application in all candidates page among all other who want to be a pilot just like you.
+  
+### Words from the author
+Thank you for viewing or reviewing my App! I hope you had fun or learned something new of the really vast Universe of Star Wars.
