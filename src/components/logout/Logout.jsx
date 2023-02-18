@@ -10,11 +10,7 @@ const Logout = () => {
     navigate(routing.public);
   }
 
-  return (
-
-    <button onClick={logoutUser}>Logout</button>
-
-  );
+  return <button onClick={logoutUser}>Logout</button>;
 };
 
 export default Logout;

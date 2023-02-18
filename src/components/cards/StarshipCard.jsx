@@ -18,15 +18,14 @@ export default function CardComponent({ singleStarship, starshipId }) {
 
   const { t } = useTranslation(["common"]);
 
-
   function handleLike(starshipId) {
-    setIsActive(current => !current);
+    setIsActive((current) => !current);
     const starshipArr = getCacheVal("liked");
     const findStarshipIndex = starshipArr?.findIndex((s) => s === starshipId);
-    
-    if(findStarshipIndex === -1){
-    starshipArr.push(starshipId);
-        setCacheVal("liked", starshipArr);
+
+    if (findStarshipIndex === -1) {
+      starshipArr.push(starshipId);
+      setCacheVal("liked", starshipArr);
     } else {
       starshipArr.splice(findStarshipIndex, 1);
       setCacheVal("liked", starshipArr);
@@ -55,7 +54,11 @@ export default function CardComponent({ singleStarship, starshipId }) {
         <IconButton
           id="likeButton"
           className={`${styles.likeBtn} 
-            ${getCacheVal("liked").findIndex((s) => s === starshipId) !== -1 ? `${styles.active}` : ""}`}
+            ${
+              getCacheVal("liked").findIndex((s) => s === starshipId) !== -1
+                ? `${styles.active}`
+                : ""
+            }`}
           aria-label="add to favorites"
           onClick={() => handleLike(starshipId)}
         >

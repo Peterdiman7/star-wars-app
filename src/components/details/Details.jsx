@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import PlanetCard from "../cards/PlanetCard";
-import { toast } from "react-hot-toast"
+import { toast } from "react-hot-toast";
 import axios from "axios";
 
 const Details = () => {
@@ -23,7 +23,7 @@ const Details = () => {
     fetchPlanet();
   }, []);
 
-  return <PlanetCard singlePlanet={singlePlanet}/>;
+  return <PlanetCard singlePlanet={singlePlanet} />;
 };
 
 export default Details;

@@ -4,18 +4,17 @@ import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
 
 const LanguageSelector = () => {
+  const { i18n } = useTranslation(["common"]);
 
-    const { i18n } = useTranslation(["common"]);
+  useEffect(() => {
+    if (localStorage.getItem("i18nextLng")?.length > 2) {
+      i18next.changeLanguage("en");
+    }
+  }, []);
 
-    useEffect(() => {
-        if (localStorage.getItem("i18nextLng")?.length > 2) {
-          i18next.changeLanguage("en");
-        }
-      }, []);
-
-      const handleLanguageChange = (e) => {
-        i18n.changeLanguage(e.target.value);
-     };
+  const handleLanguageChange = (e) => {
+    i18n.changeLanguage(e.target.value);
+  };
 
   return (
     <select

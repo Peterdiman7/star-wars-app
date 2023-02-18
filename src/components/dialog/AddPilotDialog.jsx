@@ -68,17 +68,14 @@ const AddPilotDialog = () => {
     },
     onSubmit: (values) => {
       results.post("/pilots.json", values);
-      toast.success(
-        `${t("applicationSuccessful")}`,
-        {
-          duration: 3000,
-          position: "top-center",
-          iconTheme: {
-            primary: "#A4DE02",
-            secondary: "#fff",
-          },
-        }
-      );
+      toast.success(`${t("applicationSuccessful")}`, {
+        duration: 3000,
+        position: "top-center",
+        iconTheme: {
+          primary: "#A4DE02",
+          secondary: "#fff",
+        },
+      });
       setTimeout(() => {
         setIsOpen(false);
         navigate(routing.pilots);
