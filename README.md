@@ -19,6 +19,30 @@ You may also see any lint errors in the console.
 Launches the test runner in the interactive watch mode.\
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
+### `libraries used`
+### ReactJS 
+  The web-application is created via ReactJS library with the help of React hooks, custom hooks, state, context provider, routing etc..
+
+### Firebase 
+  Firebase is being used to provide authentication for the users. Thanks to it, you can login, register or become a pilot*.
+  
+  become a pilot* - feature that allows you to fill a form and post your form to a realtime database.
+  
+### Material UI
+  Non-commercial Material UI is being used to provide beautiful and responsive designs
+
+### Formik and YUP 
+  Thanks to these libraries the become a pilot form is being validated dynamically and gives you information about the mistake you've made during the completion.
+  
+### Axios
+  Used as a faster and better alternative to fetch.
+
+### React i18n
+  The library used for language change is React i18n. That's how the chosen language persists throughout the whole application. Current languages are Bulgarian and English.
+
+### react-hot-toast
+  This library is being used for beautiful and minimalistic error or success notifications
+
 ### Main Idea
 This React application is based on one of the most popular sagas in history of movies and television.
 Star-wars-app gives you the opportunity to take a peak into the World of Star Wars.
