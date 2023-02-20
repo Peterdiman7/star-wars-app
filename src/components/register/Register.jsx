@@ -28,33 +28,33 @@ const Register = () => {
   };
 
   return (
-      <form className={styles.form} onSubmit={handleSubmit}>
-        <div className={styles.title}>{t("welcome")}</div>
-        <div className={styles.subtitle}>{t("createAcc")}</div>
-        <div className={styles.inputContainer}>
-          <input
-            onChange={(e) => setEmail(e.target.value)}
-            name="username"
-            id="firstname"
-            className={styles.emailInput}
-            type="text"
-            placeholder={t("emailInput")}
-          />
-        </div>
-        <div className={styles.inputContainer}>
-          <input
-            onChange={(e) => setPassword(e.target.value)}
-            name="password"
-            id="lastname"
-            className={styles.passwordInput}
-            type="password"
-            placeholder={t("passwordInput")}
-          />
-        </div>
-        <button type="submit" className={styles.submit}>
-          {t("submit")}
-        </button>
-      </form>
+    <form className={styles.form} onSubmit={handleSubmit}>
+      <div className={styles.title}>{t("welcome")}</div>
+      <div className={styles.subtitle}>{t("createAcc")}</div>
+      <div className={styles.inputContainer}>
+        <input
+          onChange={(e) => setEmail(e.target.value)}
+          name="username"
+          id="firstname"
+          className={styles.emailInput}
+          type="text"
+          placeholder={t("emailInput")}
+        />
+      </div>
+      <div className={styles.inputContainer}>
+        <input
+          onChange={(e) => setPassword(e.target.value)}
+          name="password"
+          id="lastname"
+          className={styles.passwordInput}
+          type="password"
+          placeholder={t("passwordInput")}
+        />
+      </div>
+      <button type="submit" className={styles.submit}>
+        {t("submit")}
+      </button>
+    </form>
   );
 };
 export default Register;

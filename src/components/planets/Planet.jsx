@@ -1,7 +1,5 @@
 import { Button, Grid } from "@mui/material";
 
-import Header from "../header/Header";
-
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -18,7 +16,7 @@ const Planet = () => {
   const [isActive, setIsActive] = useState(true);
   const [counter, setCounter] = useState(1);
 
-  const climateArr = planets.map(planet => planet.climate);
+  const climateArr = planets.map((planet) => planet.climate);
 
   const url = `https://swapi.dev/api/planets`;
 
@@ -28,7 +26,6 @@ const Planet = () => {
 
   planets.forEach((planet) => climateArr.push(planet.climate));
   const showPageOne = async () => {
-
     const showLessBtn = document.querySelector("#showLess");
     showLessBtn.disabled = true;
 
@@ -47,12 +44,11 @@ const Planet = () => {
   const showPageTwo = async () => {
     const showLessBtn = document.querySelector("#showLess");
     showLessBtn.disabled = false;
-    
+
     const showMoreBtn = document.querySelector("#showMore");
     showMoreBtn.disabled = true;
-    
-    try {
 
+    try {
       const response = await axios(`${url}?page=${counter + 1}`);
       const data = response.data;
       setPlanets(data.results);
@@ -79,7 +75,6 @@ const Planet = () => {
   if (!isActive) {
     return (
       <div>
-        <Header />
         <div className={styles.filterBtnContainer}>
           <input
             onChange={(e) => setQuery(e.target.value)}
@@ -164,7 +159,6 @@ const Planet = () => {
   } else {
     return (
       <div>
-        <Header />
         <div className={styles.filterBtnContainer}>
           <input
             onChange={(e) => setQuery(e.target.value)}

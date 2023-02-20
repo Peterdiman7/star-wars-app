@@ -9,9 +9,16 @@ const StarshipDetails = () => {
   const [singleStarship, setSingleStarship] = useState("");
 
   useEffect(() => {
-    fetch(url + id)
-      .then((res) => res.json())
-      .then((data) => setSingleStarship(data));
+    const fetchStarship = async () => {
+      try {
+        const response = await axios(url + id);
+        const data = response.data;
+        setSingleStarship(data);
+      } catch (error) {
+        toast.error("Starship not found!");
+      }
+    };
+    fetchStarship();
   }, []);
   return <CardComponent singleStarship={singleStarship} starshipId={id} />;
 };

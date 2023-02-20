@@ -18,20 +18,18 @@ export default function CardComponent({ singleStarship, starshipId }) {
 
   const { t } = useTranslation(["common"]);
 
-
-
   function handleLike(starshipId) {
-    setIsActive(current => !current);
-    let starshipArr = getCacheVal("liked");
-    
-    if(!starshipArr){
-      starshipArr = [];
-    } 
-    if(!starshipArr.includes(starshipId)){
-    starshipArr.push(starshipId);
-        setCacheVal("liked", starshipArr);
-      }
-      console.log(starshipArr);
+    setIsActive((current) => !current);
+    const starshipArr = getCacheVal("liked");
+    const findStarshipIndex = starshipArr?.findIndex((s) => s === starshipId);
+
+    if (findStarshipIndex === -1) {
+      starshipArr.push(starshipId);
+      setCacheVal("liked", starshipArr);
+    } else {
+      starshipArr.splice(findStarshipIndex, 1);
+      setCacheVal("liked", starshipArr);
+    }
   }
 
   return (
@@ -56,7 +54,11 @@ export default function CardComponent({ singleStarship, starshipId }) {
         <IconButton
           id="likeButton"
           className={`${styles.likeBtn} 
-            ${isActive ? `${styles.active}` : ""}`}
+            ${
+              getCacheVal("liked").findIndex((s) => s === starshipId) !== -1
+                ? `${styles.active}`
+                : ""
+            }`}
           aria-label="add to favorites"
           onClick={() => handleLike(starshipId)}
         >

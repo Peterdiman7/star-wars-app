@@ -12,13 +12,11 @@ export default function useFetch(url) {
         const data = response.data;
         setData(data.results);
       } catch (error) {
-        toast.error({
-          
-        })
+        toast.error({});
         alert(error.response);
       }
     };
     fetchData();
   }, [url]);
   return { data };
-};
+}

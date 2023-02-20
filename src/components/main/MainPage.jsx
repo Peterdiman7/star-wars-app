@@ -1,6 +1,5 @@
 import { ImageList, ImageListItem } from "@mui/material";
 import { useTranslation } from "react-i18next";
-import Header from "../header/Header";
 
 import styles from "../main/MainPage.module.css";
 
@@ -9,7 +8,6 @@ const MainPage = () => {
 
   return (
     <div>
-      <Header />
       <div className={styles.titleContainer}>
         <h1 className={styles.title}>{t("starWarsWelcomeTitle")}</h1>
       </div>

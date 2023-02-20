@@ -13,15 +13,19 @@ import StarshipDetails from "./components/details/StarshipDetails";
 import Register from "./components/register/Register";
 import { Toaster } from "react-hot-toast";
 import AddPilotDialog from "./components/dialog/AddPilotDialog";
-import { AuthContextProvider } from "./context/AuthContext";
+import { UserAuth } from "./context/AuthContext";
 import PrivateRoute from "./utils/PrivateRoute";
 import PublicRoutes from "./utils/PublicRoutes";
+import Header from "./components/header/Header";
 
 function App() {
+
+  const { user } = UserAuth();
+
   return (
     <>
       <Suspense fallback={"Loading..."}>
-        <AuthContextProvider>
+          {user && <Header /> }
             <Routes>
               <Route path="/main" element={<PrivateRoute> <MainPage /> </PrivateRoute>} />
               <Route path="/planets" element={<PrivateRoute> <Planet /> </PrivateRoute>} />
@@ -34,7 +38,6 @@ function App() {
               <Route path="/login" element={<PublicRoutes> <Login /> </PublicRoutes>} />
               <Route path="/register" element={<PublicRoutes> <Register /> </PublicRoutes>} />
             </Routes>
-        </AuthContextProvider>
         <Toaster />
       </Suspense>
     </>
