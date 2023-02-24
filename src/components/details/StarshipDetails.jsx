@@ -1,7 +1,8 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import CardComponent from "../cards/StarshipCard";
-
+import axios from "axios";
+import { toast } from "react-hot-toast"
 const StarshipDetails = () => {
   const url = "https://swapi.dev/api/starships/";
 
