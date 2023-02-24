@@ -1,0 +1,10 @@
+.button-group {
+    display: flex;
+    justify-content: center;
+}
+
+.regionBtn:hover {
+    cursor: pointer;
+    color: aqua !important;
+    background-color: #00CCCC !important;
+}

@@ -1,9 +1,7 @@
 export const routing = {
-  planets: "/planets",
-  pilots: "/pilots",
+  pokemon: "/pokemon",
   starships: "/starships",
   login: "/login",
   register: "/register",
-  main: "/main",
   public: "/",
 };

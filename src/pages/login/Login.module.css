@@ -1,0 +1,109 @@
+.background {
+  height: 100vh;
+  background-color: wheat;
+}
+
+.form {
+    background-color: wheat;
+    border-radius: 20px;
+    margin: auto;
+    box-sizing: border-box;
+    height: 500px;
+    padding: 20px;
+    width: 100%;
+  }
+  
+  .title {
+    color: black;
+    font-family: sans-serif;
+    font-size: 36px;
+    font-weight: 600;
+    margin-top: 30px;
+    text-align: center;
+  }
+  
+  .subtitle {
+    color: black;
+    font-family: sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  
+  .inputContainer {
+    height: 50px;
+    position: relative;
+    width: 50%;
+    margin: auto;
+    margin-bottom: 30px;
+  }
+  
+  .emailInput {
+    background-color: #332011;
+    border-radius: 12px;
+    border: 0;
+    box-sizing: border-box;
+    color: #eee;
+    font-size: 18px;
+    height: 100%;
+    outline: 0;
+    padding: 4px 20px 0;
+    width: 100%;
+  }
+  
+  .passwordInput {
+    background-color: #332011;
+    border-radius: 12px;
+    border: 0;
+    box-sizing: border-box;
+    color: #eee;
+    font-size: 18px;
+    height: 100%;
+    outline: 0;
+    padding: 4px 20px 0;
+    width: 100%;
+  }
+  
+  .placeholder {
+    color: white;
+    font-family: sans-serif;
+    left: 20px;
+    line-height: 14px;
+    pointer-events: none;
+    position: absolute;
+    transform-origin: 0 50%;
+    transition: transform 200ms, color 200ms;
+    top: 20px;
+  }
+  
+  .submit {
+    background-color: #633C15;
+    border-radius: 12px;
+    border: 0;
+    box-sizing: border-box;
+    color: wheat;
+    cursor: pointer;
+    font-size: 18px;
+    height: 50px;
+    margin-top: 38px;
+    text-align: center;
+    margin-left: 25%;
+    margin-right: 25%;
+    width: 50%;
+  }
+  
+  .submit:active {
+    background-color: #332011;
+  }
+
+  .imgContainer {
+    padding-top: 20px;
+    text-align: center;
+  }
+  
+  .eeveeImg {
+    width: 250px;
+  }
+  

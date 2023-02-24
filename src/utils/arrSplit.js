@@ -1,6 +1,6 @@
-export function planetId (url) {
-    let planetIdArr = url.split('/');
-    return +planetIdArr[5];
+export function pokeId (url) {
+    let pokeIdArr = url.split('/');
+    return +pokeIdArr[6];
 }
 
 export function starshipId (url) {

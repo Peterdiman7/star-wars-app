@@ -44,7 +44,7 @@
     "starshipNameLength": "Името на кораба трябва да е мин. 3 символа!",
     "applicationSuccessful": "Кандидатствахте Успешно! ",
     "enterEmail": "И-мейл адрес...",
-    "enterPassword": "Парола...",
+    "passwordInput": "Парола...",
     "startInput": "Дата на започване: ",
     "starshipInput": "Космически кораб: ",
     "experienceInput": "Опит: ",
